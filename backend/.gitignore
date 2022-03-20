@@ -1,0 +1,2 @@
+# .gitignore
+/sql_app/__pycache__
