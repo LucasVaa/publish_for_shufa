@@ -1,3 +1,3 @@
 # .gitignore
 /sql_app/__pycache__
-sql_app.db
+/sql_app.db
