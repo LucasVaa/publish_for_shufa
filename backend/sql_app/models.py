@@ -1,3 +1,4 @@
+from email.policy import default
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -24,4 +25,29 @@ class Item(Base):
     owner_id = Column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="items")
-    
+
+
+class Hanzi(Base):
+    __tablename__ = "hanzi"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    characterId = Column(String(255), index=True)
+    fileName = Column(String, default="")
+    tone = Column(Integer, default=0)
+    pinyin = Column(String, default="")
+    title = Column(String, default="")
+    date = Column(String, default="")
+    creator = Column(String, default="")
+    subject = Column(String, default="")
+    publisher = Column(String, default="")
+    type = Column(String, default="")
+    description = Column(String, default="")
+    contributor = Column(String, default="")
+    format = Column(String, default="")
+    source = Column(String, default="")
+    rights = Column(String, default="")
+    identifier = Column(String, default="")
+    language = Column(String, default="chinese")
+    relation = Column(String, default="")
+    coverage = Column(String, default="")
+

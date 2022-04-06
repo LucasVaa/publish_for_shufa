@@ -6,17 +6,32 @@ npm install
 # 本地开发 启动项目
 npm run serve
 ```
+#### DC元数据
+```
+DCMeta = {
+    "title": "test", // "啊",
+    "date": "test", // "东汉",
+    "creator": "test", // "赵佶",
+    "subject": "test",
+    "publisher": "test", // "中国艺术科技研究所"
+    "type": "test", // "隶书",
+    "description": "test",
+    "contributor": "test",
+    "format": "test", // "photo"
+    "source": "test", // "西狭颂",
+    "rights": "test",
+    "identifier": "test",
+    "language": "test", // "chinese"
+    "relation": "test",
+    "coverage": "test",
+}
+```
 #### 书法资源元数据
 ```
-import json
-
 additiondata = {
-    "characterId": "1",
-    "dynasty": "东汉",
-    "script": "隶书",
-    "source": "西狭颂",
+    "characterId": "AT2601000001",
     "fileName": "000001.a.donghan.lishu..xixiasong.4.jpg",
-    "imageNumber": 3
+    "DCMeta": DCMeta,
 }
 
 data = {

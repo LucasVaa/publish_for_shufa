@@ -53,3 +53,8 @@ def create_item_for_user(
 def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     items = crud.get_items(db, skip=skip, limit=limit)
     return items
+
+@app.post("/script/hanzi")
+def create_hanzi_items(db: Session = Depends(get_db)):
+    items = crud.create_hanzi_item(db)
+    return items

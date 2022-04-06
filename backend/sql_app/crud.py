@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from . import models, schemas
+from . import models, schemas, handfiles
 
 
 def get_user(db: Session, user_id: int):
@@ -34,3 +34,8 @@ def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
     db.commit()
     db.refresh(db_item)
     return db_item
+
+def create_hanzi_item(db: Session):
+    handfiles.sheet5(db)
+    handfiles.sheet1(db)
+    return "db_item"
