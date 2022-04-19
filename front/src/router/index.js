@@ -47,7 +47,6 @@ export const asyncRoutes = [
         component: () => import('@/views/index/index'),
         meta: {
           title: '首页',
-          icon: 'home',
           affix: true,
         },
       },
@@ -71,33 +70,17 @@ export const asyncRoutes = [
     ],
   }, */
   {
-    path: '/mall',
+    path: '/shufalist',
     component: Layout,
     redirect: 'noRedirect',
-    name: 'Mall',
-    meta: {
-      title: '商城',
-      icon: 'shopping-cart',
-      permissions: ['admin'],
-    },
-
     children: [
-      {
-        path: 'pay',
-        name: 'Pay',
-        component: () => import('@/views/mall/pay/index'),
-        meta: {
-          title: '支付',
-          noKeepAlive: true,
-        },
-        children: null,
-      },
       {
         path: 'goodsList',
         name: 'GoodsList',
         component: () => import('@/views/mall/goodsList/index'),
         meta: {
-          title: '商品列表',
+          title: '历代书法',
+          affix: true,
         },
       },
     ],
