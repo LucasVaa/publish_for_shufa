@@ -90,7 +90,9 @@ instance.interceptors.response.use(
     if (codeVerificationArray.includes(code)) {
       return data
     } else {
+      return data
       handleCode(code, msg)
+      return Promise.reject(JSON.stringify({ data: data }))
       return Promise.reject(
         'vue-admin-beautiful请求异常拦截:' +
           JSON.stringify({ url: config.url, code, msg }) || 'Error'

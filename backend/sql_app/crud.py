@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import select, or_, and_
 
 from . import models, schemas, handfiles
 
@@ -17,7 +18,8 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
 
 def create_user(db: Session, user: schemas.UserCreate):
     fake_hashed_password = user.password + "notreallyhashed"
-    db_user = models.User(email=user.email, hashed_password=fake_hashed_password)
+    db_user = models.User(
+        email=user.email, hashed_password=fake_hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -35,7 +37,39 @@ def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
     db.refresh(db_item)
     return db_item
 
+
 def create_hanzi_item(db: Session):
     handfiles.sheet5(db)
     handfiles.sheet1(db)
     return "db_item"
+
+
+def get_shufa_list(db: Session):
+    statement = select(models.Hanzi).where(
+        models.Hanzi.id >= 0, models.Hanzi.id < 20)
+    result = db.execute(statement).scalars().all()
+    return result
+
+
+def get_shufa_list_by_id(db: Session, id: int, size: int, title: str):
+    if (title == ""):
+        statement = select(models.Hanzi).where(
+            models.Hanzi.id >= (id - 1) * size + 1, models.Hanzi.id < (id - 1) * size + size + 1)
+        result = db.execute(statement).scalars().all()
+    else:
+        statement = select(models.Hanzi).where(
+            models.Hanzi.title == title)
+        result = db.execute(statement).scalars().all()[
+            (id - 1) * size: (id - 1) * size + size]
+
+    return result
+
+
+def get_shufa_total(db: Session, title: str):
+    if (title == ""):
+        result = db.query(models.Hanzi).count()
+    else:
+        statement = select(models.Hanzi).where(
+            models.Hanzi.title == title)
+        result = len(db.execute(statement).scalars().all())
+    return result

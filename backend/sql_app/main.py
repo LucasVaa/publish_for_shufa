@@ -1,15 +1,28 @@
+from tokenize import String
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 
+import os.path
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Dependency
 def get_db():
@@ -58,3 +71,33 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def create_hanzi_items(db: Session = Depends(get_db)):
     items = crud.create_hanzi_item(db)
     return items
+
+
+@app.get("/getImage/{fileName}")
+def get_image(db: Session = Depends(get_db), fileName: str = ""):
+    for i in range(1, 9):
+        path = "/home/lucas/Documents/shufa/CD-" + \
+            str(i) + "/HanziDatabase2014/Hanzi_Image/" + fileName
+        if (os.path.isfile(path)):
+            return FileResponse(path)
+    print(fileName)
+    print("++++")
+    return FileResponse("/home/lucas/Documents/shufa/CD-1/HanziDatabase2014/Hanzi_Image/000001.a.jinxiandai.zhuanshu.qibaishi.yinzhangwenzi.10.jpg")
+
+
+@app.get("/getShufaList")
+def get_shufa_list(db: Session = Depends(get_db)):
+    items = crud.get_shufa_list(db)
+    return items
+
+
+@app.get("/getShufaListById")
+def get_shufa_list_by_id(db: Session = Depends(get_db), id: int = 0, size: int = 10, title: str = ""):
+    items = crud.get_shufa_list_by_id(db=db, id=id, size=size, title=title)
+    return items
+
+
+@app.get("/getShufaTotal")
+def get_shufa_total(db: Session = Depends(get_db), title: str = ""):
+    item = crud.get_shufa_total(db, title=title)
+    return item

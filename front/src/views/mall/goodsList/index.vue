@@ -44,9 +44,8 @@
               <img :src="item.image" class="goods-list-image" />
             </div>
             <div class="goods-list-title">{{ item.title }}</div>
-            <div class="goods-list-description">{{ item.description }}</div>
-            <div class="goods-list-price">
-              <span>¥ {{ item.price }} 元</span>
+            <div class="goods-list-description">
+              {{ '字体: ' + item.type + ' 作者: ' + item.creator }}
             </div>
           </div>
         </el-card>
@@ -65,7 +64,12 @@
 </template>
 
 <script>
-  import { getList } from '@/api/goodsList'
+  import {
+    getList,
+    getShufaList,
+    getShufaTotal,
+    getShufaListById,
+  } from '@/api/goodsList'
 
   export default {
     name: 'Goods',
@@ -74,8 +78,9 @@
       return {
         queryForm: {
           pageNo: 1,
-          pageSize: 20,
+          pageSize: 10,
           title: '',
+          data: '',
         },
         list: null,
         listLoading: true,
@@ -85,7 +90,7 @@
       }
     },
     created() {
-      this.fetchData()
+      this.initData()
     },
     methods: {
       handleSizeChange(val) {
@@ -96,15 +101,28 @@
         this.queryForm.pageNo = val
         this.fetchData()
       },
-      handleQuery() {
+      async handleQuery() {
         this.queryForm.pageNo = 1
+        this.total = await getShufaTotal({
+          title: this.queryForm.title,
+        })
+        this.fetchData()
+      },
+      async initData() {
+        this.listLoading = true
+        this.total = await getShufaTotal()
         this.fetchData()
       },
       async fetchData() {
+        this.queryForm.data = await getShufaListById({
+          id: this.queryForm.pageNo,
+          size: this.queryForm.pageSize,
+          title: this.queryForm.title,
+        })
         this.listLoading = true
         const { data, totalCount } = await getList(this.queryForm)
         this.list = data
-        this.total = totalCount
+        // this.total = totalCount
       },
     },
   }
@@ -124,12 +142,12 @@
       }
 
       .goods-list-image-group {
-        height: 400px;
+        height: 500px;
         overflow: hidden;
 
         .goods-list-image {
           width: 100%;
-          height: 400px;
+          height: 500px;
           transition: all ease-in-out 0.3s;
 
           &:hover {
