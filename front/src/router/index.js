@@ -52,23 +52,6 @@ export const asyncRoutes = [
       },
     ],
   },
-  /* {
-    path: "/test",
-    component: Layout,
-    redirect: "noRedirect",
-    children: [
-      {
-        path: "test",
-        name: "Test",
-        component: () => import("@/views/test/index"),
-        meta: {
-          title: "test",
-          icon: "marker",
-          permissions: ["admin"],
-        },
-      },
-    ],
-  }, */
   {
     path: '/shufalist',
     component: Layout,
@@ -84,6 +67,12 @@ export const asyncRoutes = [
         },
       },
     ],
+  },
+  {
+    path: '/all',
+    name: 'all',
+    component: () => import('@/views/mall/goodsList/index'),
+    hidden: true,
   },
   {
     path: '*',

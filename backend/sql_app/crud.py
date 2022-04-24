@@ -51,25 +51,31 @@ def get_shufa_list(db: Session):
     return result
 
 
-def get_shufa_list_by_id(db: Session, id: int, size: int, title: str):
-    if (title == ""):
+def get_shufa_list_by_id(db: Session, id: int, size: int, title: str, creator: str, date: str, type: str):
+    if (title == "" and creator == "" and date == ""):
         statement = select(models.Hanzi).where(
             models.Hanzi.id >= (id - 1) * size + 1, models.Hanzi.id < (id - 1) * size + size + 1)
         result = db.execute(statement).scalars().all()
     else:
         statement = select(models.Hanzi).where(
-            models.Hanzi.title == title)
+            or_(models.Hanzi.title == title, title == ""),
+            or_(models.Hanzi.creator == creator, creator == ""),
+            or_(models.Hanzi.date == date, date == ""),
+            or_(models.Hanzi.type == type, type == ""))
         result = db.execute(statement).scalars().all()[
             (id - 1) * size: (id - 1) * size + size]
 
     return result
 
 
-def get_shufa_total(db: Session, title: str):
-    if (title == ""):
+def get_shufa_total(db: Session, title: str, creator: str, date: str, type: str):
+    if (title == "" and creator == "" and date == ""):
         result = db.query(models.Hanzi).count()
     else:
         statement = select(models.Hanzi).where(
-            models.Hanzi.title == title)
+            or_(models.Hanzi.title == title, title == ""),
+            or_(models.Hanzi.creator == creator, creator == ""),
+            or_(models.Hanzi.date == date, date == ""),
+            or_(models.Hanzi.type == type, type == ""))
         result = len(db.execute(statement).scalars().all())
     return result

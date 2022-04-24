@@ -92,12 +92,19 @@ def get_shufa_list(db: Session = Depends(get_db)):
 
 
 @app.get("/getShufaListById")
-def get_shufa_list_by_id(db: Session = Depends(get_db), id: int = 0, size: int = 10, title: str = ""):
-    items = crud.get_shufa_list_by_id(db=db, id=id, size=size, title=title)
+def get_shufa_list_by_id(db: Session = Depends(get_db),
+                         id: int = 0, size: int = 10,
+                         title: str = "", creator: str = "",
+                         date: str = "", type: str = ""):
+    items = crud.get_shufa_list_by_id(
+        db=db, id=id, size=size, title=title, creator=creator, date=date, type=type)
     return items
 
 
 @app.get("/getShufaTotal")
-def get_shufa_total(db: Session = Depends(get_db), title: str = ""):
-    item = crud.get_shufa_total(db, title=title)
+def get_shufa_total(db: Session = Depends(get_db),
+                    title: str = "", creator: str = "",
+                    date: str = "", type: str = ""):
+    item = crud.get_shufa_total(
+        db, title=title, creator=creator, date=date, type=type)
     return item

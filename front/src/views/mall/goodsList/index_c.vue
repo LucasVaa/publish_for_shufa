@@ -1,74 +1,33 @@
 <template>
   <div class="goods-list-container">
-    <vab-query-form>
-      <vab-query-form-right-panel :span="24">
-        <el-form
-          ref="form"
-          :model="queryForm"
-          :inline="true"
-          @submit.native.prevent
-        >
-          <el-form-item>
-            <el-input v-model="queryForm.title" placeholder="汉字" />
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="queryForm.date" placeholder="朝代" />
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="queryForm.creator" placeholder="作者" />
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="queryForm.type" placeholder="字体" />
-          </el-form-item>
-          <el-form-item>
-            <el-button
-              icon="el-icon-search"
-              type="primary"
-              native-type="submit"
-              @click="handleQuery"
-            >
-              查询
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </vab-query-form-right-panel>
-    </vab-query-form>
     <el-row :gutter="20">
-      <el-col
-        v-for="(item, index) in list"
-        :key="index"
-        :xs="24"
-        :sm="8"
-        :md="8"
-        :lg="8"
-        :xl="6"
-      >
-        <el-card :body-style="{ padding: '0px' }" shadow="hover">
-          <div class="goods-list-card-body">
-            <div class="goods-list-tag-group">
-              <el-tag v-if="item.isRecommend" hit type="success">推荐</el-tag>
-              <el-tag v-if="item.status === 0" hit type="danger">缺货</el-tag>
+      <el-col :span="18" :offset="3">
+        <el-col
+          v-for="(item, index) in list"
+          :key="index"
+          :sm="6"
+          :md="6"
+          :lg="6"
+          :xl="6"
+        >
+          <el-card :body-style="{ padding: '0px' }" shadow="hover">
+            <div class="goods-list-card-body">
+              <div class="goods-list-tag-group">
+                <el-tag v-if="item.isRecommend" hit type="success">推荐</el-tag>
+                <el-tag v-if="item.status === 0" hit type="danger">缺货</el-tag>
+              </div>
+              <div class="goods-list-image-group">
+                <img :src="item.image" class="goods-list-image" />
+              </div>
+              <div class="goods-list-title">{{ item.title }}</div>
+              <div class="goods-list-description">
+                {{ '字体: ' + item.type + ' 作者: ' + item.creator }}
+              </div>
             </div>
-            <div class="goods-list-image-group">
-              <img :src="item.image" class="goods-list-image" />
-            </div>
-            <div class="goods-list-title">{{ item.title }}</div>
-            <div class="goods-list-description">
-              {{ '字体: ' + item.type + ' 作者: ' + item.creator }}
-            </div>
-          </div>
-        </el-card>
+          </el-card>
+        </el-col>
       </el-col>
     </el-row>
-    <el-pagination
-      background
-      :current-page="queryForm.pageNo"
-      :layout="layout"
-      :page-size="queryForm.pageSize"
-      :total="total"
-      @current-change="handleCurrentChange"
-      @size-change="handleSizeChange"
-    ></el-pagination>
   </div>
 </template>
 
@@ -87,7 +46,7 @@
       return {
         queryForm: {
           pageNo: 1,
-          pageSize: 10,
+          pageSize: 12,
           title: '',
           creator: '',
           date: '',
@@ -160,12 +119,12 @@
       }
 
       .goods-list-image-group {
-        height: 500px;
+        height: 300px;
         overflow: hidden;
 
         .goods-list-image {
-          width: 100%;
-          height: 500px;
+          width: 200px;
+          height: 300px;
           transition: all ease-in-out 0.3s;
 
           &:hover {
