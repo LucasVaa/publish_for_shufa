@@ -1,3 +1,4 @@
+from re import L
 from sqlalchemy.orm import Session
 from sqlalchemy import select, or_, and_
 
@@ -79,3 +80,15 @@ def get_shufa_total(db: Session, title: str, creator: str, date: str, type: str)
             or_(models.Hanzi.type == type, type == ""))
         result = len(db.execute(statement).scalars().all())
     return result
+
+
+def exe_oai_pmh(db: Session, verb: str):
+    if (verb == "ListRecords"):
+        id = 1
+        size = 100
+        statement = select(models.Hanzi).where(
+            models.Hanzi.id >= (id - 1) * size + 1, models.Hanzi.id < (id - 1) * size + size + 1)
+        result = db.execute(statement).scalars().all()
+        return result
+    else:
+        return {}

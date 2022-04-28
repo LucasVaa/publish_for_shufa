@@ -17,7 +17,11 @@
                 <el-tag v-if="item.status === 0" hit type="danger">缺货</el-tag>
               </div>
               <div class="goods-list-image-group">
-                <img :src="item.image" class="goods-list-image" />
+                <el-image
+                  :src="item.image"
+                  class="goods-list-image"
+                  :preview-src-list="[item.image]"
+                />
               </div>
               <div class="goods-list-title">{{ item.title }}</div>
               <div class="goods-list-description">
