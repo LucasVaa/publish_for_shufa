@@ -45,12 +45,17 @@
 
   export default {
     name: 'Goods',
-    components: {},
+    props: {
+      dataType: {
+        type: String,
+        default: '',
+      },
+    },
     data() {
       return {
         queryForm: {
           pageNo: 1,
-          pageSize: 12,
+          pageSize: 8,
           title: '',
           creator: '',
           date: '',
@@ -63,6 +68,13 @@
         total: 0,
         elementLoadingText: '正在加载...',
       }
+    },
+    computed: {
+      key() {
+        return this.$route.name !== undefined
+          ? this.$route.name + +new Date()
+          : this.$route + +new Date()
+      },
     },
     created() {
       this.initData()
@@ -92,13 +104,15 @@
         this.fetchData()
       },
       async fetchData() {
+        console.log('this.dataType')
+        console.log(this.dataType)
         this.queryForm.data = await getShufaListById({
           id: this.queryForm.pageNo,
           size: this.queryForm.pageSize,
           title: this.queryForm.title,
           creator: this.queryForm.creator,
           date: this.queryForm.date,
-          type: this.queryForm.type,
+          type: this.dataType,
         })
         this.listLoading = true
         const { data, totalCount } = await getList(this.queryForm)

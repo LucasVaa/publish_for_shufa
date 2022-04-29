@@ -53,7 +53,7 @@ def get_shufa_list(db: Session):
 
 
 def get_shufa_list_by_id(db: Session, id: int, size: int, title: str, creator: str, date: str, type: str):
-    if (title == "" and creator == "" and date == ""):
+    if (title == "" and creator == "" and date == "" and type == ""):
         statement = select(models.Hanzi).where(
             models.Hanzi.id >= (id - 1) * size + 1, models.Hanzi.id < (id - 1) * size + size + 1)
         result = db.execute(statement).scalars().all()

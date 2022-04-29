@@ -69,6 +69,35 @@ export const asyncRoutes = [
     ],
   },
   {
+    path: '/metaData',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'MetaData',
+    meta: {
+      title: '元数据收割',
+      permissions: ['admin'],
+    },
+
+    children: [
+      {
+        path: 'metaDataBook',
+        name: 'MetaDataBook',
+        component: () => import('@/views/metaData/index'),
+        meta: {
+          title: '图书',
+        },
+      },
+      {
+        path: 'metaDataMusic',
+        name: 'MetaDataMusic',
+        component: () => import('@/views/metaData/index_music'),
+        meta: {
+          title: '音乐',
+        },
+      },
+    ],
+  },
+  {
     path: '/all',
     name: 'all',
     component: () => import('@/views/mall/goodsList/index'),

@@ -12,12 +12,20 @@
       <el-col style="text-align: center">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="全部" name="first">
-            <Goods />
+            <Goods :key="123" />
           </el-tab-pane>
-          <el-tab-pane label="楷书" name="second"></el-tab-pane>
-          <el-tab-pane label="篆书" name="third"></el-tab-pane>
-          <el-tab-pane label="草书" name="fourth"></el-tab-pane>
-          <el-tab-pane label="行书" name="fifth"></el-tab-pane>
+          <el-tab-pane label="楷书" name="second">
+            <Goods :key="234" data-type="楷书" />
+          </el-tab-pane>
+          <el-tab-pane label="篆书" name="third">
+            <Goods :key="234" data-type="篆书" />
+          </el-tab-pane>
+          <el-tab-pane label="草书" name="fourth">
+            <Goods :key="234" data-type="草书" />
+          </el-tab-pane>
+          <el-tab-pane label="行书" name="fifth">
+            <Goods :key="234" data-type="行书" />
+          </el-tab-pane>
         </el-tabs>
       </el-col>
     </el-row>
@@ -33,9 +41,7 @@
       </el-col>
       <el-col style="text-align: center">
         <el-tabs v-model="activeName_two" @tab-click="handleClick">
-          <el-tab-pane label="全部" name="first">
-            <Goods />
-          </el-tab-pane>
+          <el-tab-pane label="全部" name="first"></el-tab-pane>
           <el-tab-pane label="明朝" name="second"></el-tab-pane>
           <el-tab-pane label="清朝" name="third"></el-tab-pane>
           <el-tab-pane label="唐朝" name="fourth"></el-tab-pane>
@@ -47,13 +53,9 @@
 </template>
 
 <script>
-  import VabChart from '@/plugins/echarts'
   import { dependencies, devDependencies } from '../../../package.json'
   import { getList } from '@/api/changeLog'
   import { getNoticeList } from '@/api/notice'
-  import { getRepos, getStargazers } from '@/api/github'
-  import Plan from './components/Plan'
-  import VersionInformation from './components/VersionInformation'
   import Goods from '@/views/mall/goodsList/index_c.vue'
 
   export default {
