@@ -111,6 +111,6 @@ def get_shufa_total(db: Session = Depends(get_db),
 
 
 @app.get("/x")
-def exe_oai_pmh(db: Session = Depends(get_db), verb: str = ""):
-    items = crud.exe_oai_pmh(db=db, verb=verb)
+def exe_oai_pmh(db: Session = Depends(get_db), verb: str = "", offset: int = 0, rows: int = 10):
+    items = crud.exe_oai_pmh(db=db, verb=verb, offset=offset, rows=rows)
     return items

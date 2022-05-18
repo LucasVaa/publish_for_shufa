@@ -30,7 +30,7 @@
       </el-col>
     </el-row>
 
-    <el-row :gutter="20">
+    <!-- <el-row :gutter="20">
       <el-col :span="24">
         <div
           class="grid-content bg-purple"
@@ -48,13 +48,12 @@
           <el-tab-pane label="现代" name="fifth"></el-tab-pane>
         </el-tabs>
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 
 <script>
   import { dependencies, devDependencies } from '../../../package.json'
-  import { getList } from '@/api/changeLog'
   import { getNoticeList } from '@/api/notice'
   import Goods from '@/views/mall/goodsList/index_c.vue'
 
@@ -409,7 +408,6 @@
         this.$baseEventBus.$emit('theme')
       },
       async fetchData() {
-        const { data } = await getList()
         data.map((item, index) => {
           if (index === data.length - 1) {
             item.color = '#0bbd87'
