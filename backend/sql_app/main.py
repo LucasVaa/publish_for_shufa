@@ -1,7 +1,7 @@
 from tokenize import String
 from typing import List
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
@@ -114,3 +114,8 @@ def get_shufa_total(db: Session = Depends(get_db),
 def exe_oai_pmh(db: Session = Depends(get_db), verb: str = "", offset: int = 0, rows: int = 10):
     items = crud.exe_oai_pmh(db=db, verb=verb, offset=offset, rows=rows)
     return items
+
+
+@app.post("/uploadfile")
+async def create_upload_file(file: UploadFile):
+    return {"filename": file.filename}
