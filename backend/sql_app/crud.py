@@ -2,7 +2,7 @@ from re import L
 from sqlalchemy.orm import Session
 from sqlalchemy import select, or_, and_
 
-from . import models, schemas, handfiles
+from . import models, schemas
 
 
 def get_user(db: Session, user_id: int):
@@ -40,8 +40,8 @@ def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
 
 
 def create_hanzi_item(db: Session):
-    handfiles.sheet5(db)
-    handfiles.sheet1(db)
+    # handfiles.sheet5(db)
+    # handfiles.sheet1(db)
     return "db_item"
 
 
