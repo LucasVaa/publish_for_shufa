@@ -76,13 +76,13 @@ def create_hanzi_items(db: Session = Depends(get_db)):
 @app.get("/getImage/{fileName}")
 def get_image(db: Session = Depends(get_db), fileName: str = ""):
     for i in range(1, 9):
-        path = "/home/lucas/Documents/shufa/CD-" + \
+        path = "/root/shufa/CD-" + \
             str(i) + "/HanziDatabase2014/Hanzi_Image/" + fileName
         if (os.path.isfile(path)):
             return FileResponse(path)
     print(fileName)
     print("++++")
-    return FileResponse("/home/lucas/Documents/shufa/CD-1/HanziDatabase2014/Hanzi_Image/000001.a.jinxiandai.zhuanshu.qibaishi.yinzhangwenzi.10.jpg")
+    return FileResponse("/root/shufa/CD-1/HanziDatabase2014/Hanzi_Image/000001.a.jinxiandai.zhuanshu.qibaishi.yinzhangwenzi.10.jpg")
 
 
 @app.get("/getShufaList")
