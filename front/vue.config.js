@@ -38,7 +38,6 @@ const mockServer = () => {
   if (process.env.NODE_ENV === 'development') return require('./mock')
   else return ''
 }
-
 module.exports = {
   publicPath,
   assetsDir,

@@ -38,7 +38,7 @@ def sheet1(cur):
 
 
 # 通过connect方法创建数据库连接
-conn = psycopg2.connect(dbname="test", user="postgres",
+conn = psycopg2.connect(dbname="shufa", user="postgres",
                         password="123456", host="localhost", port="5432")
 
 # 创建cursor以访问数据库
