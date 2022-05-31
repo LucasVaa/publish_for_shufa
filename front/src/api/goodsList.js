@@ -10,7 +10,7 @@ export function getList(data) {
 
 export function getShufaList() {
   return request({
-    url: 'http://10.10.1.124:8000/getShufaList',
+    url: 'http://172.20.112.124:8000/getShufaList',
     method: 'get',
     timeout: 10000,
   })
@@ -18,7 +18,7 @@ export function getShufaList() {
 
 export function getShufaListById(params) {
   return request({
-    url: 'http://10.10.1.124:8000/getShufaListById',
+    url: 'http://172.20.112.124:8000/getShufaListById',
     method: 'get',
     params,
     timeout: 10000,
@@ -27,7 +27,7 @@ export function getShufaListById(params) {
 
 export function getShufaTotal(params) {
   return request({
-    url: 'http://10.10.1.124:8000/getShufaTotal',
+    url: 'http://172.20.112.124:8000/getShufaTotal',
     method: 'get',
     timeout: 10000,
     params,
