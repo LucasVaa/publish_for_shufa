@@ -12,10 +12,6 @@
         >
           <el-card :body-style="{ padding: '0px' }" shadow="hover">
             <div class="goods-list-card-body">
-              <div class="goods-list-tag-group">
-                <el-tag v-if="item.isRecommend" hit type="success">推荐</el-tag>
-                <el-tag v-if="item.status === 0" hit type="danger">缺货</el-tag>
-              </div>
               <div class="goods-list-image-group">
                 <el-image
                   :src="item.image"

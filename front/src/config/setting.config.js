@@ -47,7 +47,7 @@ const setting = {
   //是否显示在页面高亮错误
   errorLog: ['development', 'production'],
   //是否开启登录拦截
-  loginInterception: true,
+  loginInterception: false,
   //是否开启登录RSA加密
   loginRSA: true,
   //intelligence和all两种方式，前者后端权限只控制permissions不控制view文件的import（前后端配合，减轻后端工作量），all方式完全交给后端前端只负责加载

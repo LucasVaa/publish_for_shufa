@@ -83,6 +83,7 @@
     "eslint-plugin-vue": "^8.4.1",
     "filemanager-webpack-plugin": "^6.1.7",
     "image-webpack-loader": "^8.1.0",
+    "imagemin-gifsicle": "^2.0.0",
     "lint-staged": "^12.3.3",
     "plop": "^3.0.5",
     "prettier": "^2.5.1",
