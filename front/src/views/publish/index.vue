@@ -12,7 +12,7 @@
           <el-form-item label="书法缩略图" prop="imageUrl">
             <el-upload
               class="avatar-uploader"
-              action="http://172.20.112.124:8000/uploadfile"
+              action="/api/uploadfile"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload"
@@ -25,7 +25,7 @@
             <el-upload
               class="upload-demo"
               drag
-              action="http://172.20.112.124:8000/uploadfile"
+              action="/api/uploadfile"
               multiple
               :on-success="handleFileSuccess"
             >

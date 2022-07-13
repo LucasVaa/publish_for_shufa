@@ -14,9 +14,9 @@
             <div class="goods-list-card-body">
               <div class="goods-list-image-group">
                 <el-image
-                  :src="item.image"
+                  :src="item.fileName"
                   class="goods-list-image"
-                  :preview-src-list="[item.image]"
+                  :preview-src-list="[item.fileName]"
                 />
               </div>
               <div class="goods-list-title">{{ item.title }}</div>
@@ -111,8 +111,13 @@
           type: this.dataType,
         })
         this.listLoading = true
-        const { data, totalCount } = await getList(this.queryForm)
-        this.list = data
+        // const { data, totalCount } = await getList(this.queryForm)
+        for (let i = 0; i < this.queryForm.data.length; i++) {
+          this.queryForm.data[i].fileName =
+            '/api/getImage/' + this.queryForm.data[i].fileName
+        }
+
+        this.list = this.queryForm.data
         // this.total = totalCount
       },
     },
