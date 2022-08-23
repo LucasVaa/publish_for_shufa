@@ -68,22 +68,22 @@ export const asyncRoutes = [
       },
     ],
   },
-  {
-    path: '/publish',
-    component: Layout,
-    redirect: 'noRedirect',
-    children: [
-      {
-        path: 'publish',
-        name: 'Publish',
-        component: () => import('@/views/publish/index'),
-        meta: {
-          title: '发布',
-          affix: true,
-        },
-      },
-    ],
-  },
+  // {
+  //   path: '/publish',
+  //   component: Layout,
+  //   redirect: 'noRedirect',
+  //   children: [
+  //     {
+  //       path: 'publish',
+  //       name: 'Publish',
+  //       component: () => import('@/views/publish/index'),
+  //       meta: {
+  //         title: '发布',
+  //         affix: true,
+  //       },
+  //     },
+  //   ],
+  // },
   {
     path: '/metaData',
     component: Layout,

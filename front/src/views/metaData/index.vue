@@ -37,7 +37,7 @@
     },
     methods: {
       async fetchData() {
-        var temp = await getMetaData({ verb: 'ListRecords' }, '0009')
+        var temp = await getMetaData({ verb: 'ListRecords' }, '0003')
         this.tableDataBook = temp['data']
       },
     },
