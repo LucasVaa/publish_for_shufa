@@ -138,10 +138,11 @@ def get_resource(item: schemas.getResource, db: Session = Depends(get_db)):
             result = f.json()
             return result
         elif (item.resType == 1):
-            item = crud.get_shufa_re(db=db, pageNumber=item.pageNumber,
+            result = crud.get_shufa_re(db=db, pageNumber=item.pageNumber,
                                 resType=item.resType, pageSize=item.pageSize)
+            print(result)
             data = []
-            for i in item:
+            for i in result:
                 w = 100
                 h = 100
                 s = 100
