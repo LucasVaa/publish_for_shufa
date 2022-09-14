@@ -173,5 +173,6 @@ def get_resource(item: schemas.getResource, db: Session = Depends(get_db)):
             return {"returnCode": 1, "returnMsg": "API调用成功!", "returnData": data}
         else:
             return{"returnCode": 1, "returnMsg": "API调用成功!", "returnData": []}
-    except:
+    except Exception as e:
+        print(e)
         return {"returnCode": 0, "returnMsg": "API调用失败!!", "returnData": []}
