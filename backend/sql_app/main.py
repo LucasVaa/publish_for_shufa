@@ -10,7 +10,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 
+import os
 import os.path
+
+from PIL import Image
+import requests
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -119,3 +123,55 @@ def exe_oai_pmh(db: Session = Depends(get_db), verb: str = "", offset: int = 0, 
 @app.post("/uploadfile")
 async def create_upload_file(file: UploadFile):
     return {"filename": file.filename}
+
+@app.post('/getResource')
+def get_resource(item: schemas.getResource, db: Session = Depends(get_db)):
+    try:
+        if (item.resType == 3):
+            data = {
+                "resType": item.resType,
+                "pageNumber": item.pageNumber,
+                "pageSize": item.pageSize
+            }
+            url = "http://172.20.112.138:8000/getMusic"
+            f = requests.post(url, data=data)
+            result = f.json()
+            return result
+        elif (item.resType == 1):
+            item = crud.get_shufa_re(db=db, pageNumber=item.pageNumber,
+                                resType=item.resType, pageSize=item.pageSize)
+            data = []
+            for i in item:
+                w = 100
+                h = 100
+                s = 100
+                for inum in range(1, 9):
+                    path = "/root/shufa/CD-" + str(inum) + "/HanziDatabase2014/Hanzi_Image/" + i.fileName
+                    if (os.path.isfile(path)):
+                        img = Image.open(path)
+                        w = img.width
+                        h = img.height
+                        s = os.path.getsize(path)
+                data.append({
+                    "id": i.id,
+                    "name": i.title,
+                    "type": 1,
+                    "publishingHouse": "开明文教音像出版社",
+                    "author": i.creator,
+                    "createDate": i.date,
+                    "categoryName": i.type,
+                    "label": "",
+                    "materialDescribe": "",
+                    "coverImage": "",
+                    "materialPath": "http://172.20.112.124:8000/getImage/" + i.fileName,
+                    "audioTime": "",
+                    "format": "jpg",
+                    "size": s,
+                    "height": h,
+                    "width": w
+                })
+            return {"returnCode": 1, "returnMsg": "API调用成功!", "returnData": data}
+        else:
+            return{"returnCode": 1, "returnMsg": "API调用成功!", "returnData": []}
+    except:
+        return {"returnCode": 0, "returnMsg": "API调用失败!!", "returnData": []}

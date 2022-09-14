@@ -35,3 +35,8 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+class getResource(BaseModel):
+    resType: int
+    pageNumber: int
+    pageSize: int
