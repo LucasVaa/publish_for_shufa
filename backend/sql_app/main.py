@@ -15,6 +15,7 @@ import os.path
 
 from PIL import Image
 import requests
+import json
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -134,7 +135,7 @@ def get_resource(item: schemas.getResource, db: Session = Depends(get_db)):
                 "pageSize": item.pageSize
             }
             url = "http://172.20.112.138:8000/getMusic"
-            f = requests.post(url, data=item)
+            f = requests.post(url, data=json.dumps(data))
             result = f.json()
             return result
         elif (item.resType == 1):
