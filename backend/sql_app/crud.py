@@ -97,3 +97,4 @@ def get_shufa_re(db: Session, resType: int, pageNumber: int, pageSize: int):
     statement = select(models.Hanzi).order_by(models.Hanzi.id)
     result = db.execute(statement).scalars().all()[
         (pageNumber - 1) *pageSize: (pageNumber - 1)* pageSize + pageSize]
+    return result
