@@ -134,7 +134,7 @@ def get_resource(item: schemas.getResource, db: Session = Depends(get_db)):
                 "pageSize": item.pageSize
             }
             url = "http://172.20.112.138:8000/getMusic"
-            f = requests.post(url, data=data)
+            f = requests.post(url, data=item)
             result = f.json()
             return result
         elif (item.resType == 1):
