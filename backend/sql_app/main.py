@@ -179,9 +179,10 @@ def get_resource(item: schemas.getResource, db: Session = Depends(get_db)):
         print(e)
         return {"returnCode": 0, "returnMsg": "API调用失败!!", "returnData": []}
 
-@app.post("/T")
+@app.post("/T/")
 def transmit(verb: str,  params: schemas.Params,  db: Session = Depends(get_db)):
+    
     url = "http://172.20.112.140:9000/T/?verb=" + verb
-    f = requests.post(url, data=params)
+    f = requests.post(url, data=json.dumps(params))
     result = f.json()
     return result
