@@ -183,6 +183,12 @@ def get_resource(item: schemas.getResource, db: Session = Depends(get_db)):
 def transmit(verb: str,  params: schemas.Params,  db: Session = Depends(get_db)):
     
     url = "http://172.20.112.140:9000/T/?verb=" + verb
-    f = requests.post(url, data=json.dumps(params))
+    data = {
+        "targetLid": params.targetLid,
+        "lid": params.lid,
+        "requestMethod": params.requestMethod,
+        "param": params.param
+    }
+    f = requests.post(url, data=json.dumps(data))
     result = f.json()
     return result
