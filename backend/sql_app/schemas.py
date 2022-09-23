@@ -40,3 +40,9 @@ class getResource(BaseModel):
     resType: int
     pageNumber: int
     pageSize: int
+
+class Params(BaseModel):
+    targetLid:str
+    lid: str
+    requestMethod:str
+    param:dict
