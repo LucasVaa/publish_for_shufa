@@ -6,7 +6,7 @@ from psycopg2 import extras as ex
 
 
 def sheet5(cur):
-    wb = openpyxl.load_workbook(os.getcwd() + '/sql_app/hz.xlsx')
+    wb = openpyxl.load_workbook(os.getcwd() + '/sql_app/hz _no_empty.xlsx')
     sh = wb['Sheet5']
 
     datalist = []
@@ -23,7 +23,7 @@ def sheet5(cur):
 
 
 def sheet1(cur):
-    wb = openpyxl.load_workbook(os.getcwd() + '/sql_app/hz.xlsx')
+    wb = openpyxl.load_workbook(os.getcwd() + '/sql_app/hz _no_empty.xlsx')
     sh = wb['Sheet2']
 
     datalist = []
