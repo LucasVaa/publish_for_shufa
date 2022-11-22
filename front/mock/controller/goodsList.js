@@ -13,7 +13,7 @@ module.exports = [
           mock({
             uuid: '@uuid',
             image:
-              `http://172.20.112.124:8000/getImage/` +
+              `http://211.145.15.126:1024/backend-api/getImage/` +
               config.body.data[i].fileName,
             title: config.body.data[i].title,
             description: '@csentence',
