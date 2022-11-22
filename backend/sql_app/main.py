@@ -160,8 +160,6 @@ def get_resource(item: schemas.getResource, db: Session = Depends(get_db)):
                     "publishingHouse": "开明文教音像出版社",
                     "author": i.creator,
                     "createDate": "",
-                    "dynasty": i.date,
-                    "categoryName": i.type,
                     "label": i.date + "," + i.type,
                     "materialDescribe": "",
                     "coverImage": "http://172.20.112.124:8000/getImage/" + i.fileName,
