@@ -129,15 +129,15 @@ async def create_upload_file(file: UploadFile):
 def get_resource(item: schemas.getResource, db: Session = Depends(get_db)):
     try:
         if (item.resType == 3):
-            data = {
-                "resType": item.resType,
-                "pageNumber": item.pageNumber,
-                "pageSize": item.pageSize
-            }
-            url = "http://172.20.112.138:8000/getMusic"
-            f = requests.post(url, data=json.dumps(data))
-            result = f.json()
-            return result
+            # data = {
+            #     "resType": item.resType,
+            #     "pageNumber": item.pageNumber,
+            #     "pageSize": item.pageSize
+            # }
+            # url = "http://172.20.112.138:8000/getMusic"
+            # f = requests.post(url, data=json.dumps(data))
+            # result = f.json()
+            return{"returnCode": 1, "returnMsg": "API调用成功!", "returnData": []}
         elif (item.resType == 1):
             result = crud.get_shufa_re(db=db, pageNumber=item.pageNumber,
                                 resType=item.resType, pageSize=item.pageSize)
@@ -162,8 +162,8 @@ def get_resource(item: schemas.getResource, db: Session = Depends(get_db)):
                     "createDate": "",
                     "label": i.date + "," + i.type,
                     "materialDescribe": "",
-                    "coverImage": "http://172.20.112.124:8000/getImage/" + i.fileName,
-                    "materialPath": "http://172.20.112.124:8000/getImage/" + i.fileName,
+                    "coverImage": "http://172.20.116.63:8000/getImage/" + i.fileName,
+                    "materialPath": "http://172.20.116.63:8000/getImage/" + i.fileName,
                     "audioTime": "",
                     "format": "jpg",
                     "size": s,
